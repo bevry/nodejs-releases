@@ -50,7 +50,7 @@ await preloadNodeReleases()
 // now that we have preloaded the data, we can do the queries
 
 console.log(getNodeReleaseInformation('4.9.1')))
-// { version: '12', date, files, v8, npm, uv, zlib, openssl, modules, lts, security}
+// { version, date, files, v8, npm, uv, zlib, openssl, modules, lts, security}
 
 console.log(getNodeReleaseIdentifiers()))
 // [ '0.1.14', '0.1.15', '0.1.16', '0.1.17', ... ]
