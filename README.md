@@ -35,7 +35,7 @@ Fetch the release information of the Node.js versions
 
 ## Usage
 
-[Complete API Documentation.](http://master.nodejs-releases.bevry.surge.sh/docs/globals.html)
+[Complete API Documentation.](http://master.nodejs-releases.bevry.surge.sh/docs/)
 
 ```typescript
 import {
