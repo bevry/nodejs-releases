@@ -1,6 +1,5 @@
 // Import
 import Errlop from 'errlop'
-import fetch from 'node-fetch'
 import versionCompare from 'version-compare'
 
 /**
@@ -145,10 +144,10 @@ export async function preloadNodeReleases(): Promise<void> {
 			nodeReleaseMap.set(meta.version, meta)
 			nodeReleaseIdentifiers.push(meta.version)
 		}
-	} catch (err) {
+	} catch (err: any) {
 		throw new Errlop(
 			`Failed to fetch Node.js release information from the API: ${url}`,
-			err
+			err,
 		)
 	}
 }
@@ -161,7 +160,7 @@ export async function preloadNodeReleases(): Promise<void> {
  * @returns an immutable copy of the release information
  */
 export function getNodeReleaseInformation(
-	version: NodeReleaseInput
+	version: NodeReleaseInput,
 ): NodeReleaseInformation {
 	// fetch
 	const info = nodeReleaseMap.get(String(version))
@@ -170,16 +169,16 @@ export function getNodeReleaseInformation(
 		if (nodeReleaseIdentifiers.length === 0) {
 			throw new Error(
 				`Unable to get the release information for Node.js version [${JSON.stringify(
-					version
-				)}] as the cache was empty.\nFetch first, then try again.`
+					version,
+				)}] as the cache was empty.\nFetch first, then try again.`,
 			)
 		}
 		throw new Error(
 			`Unable to find the release information for Node.js version [${JSON.stringify(
-				version
+				version,
 			)}] in the cache.\nCheck the version number is valid and try again.\nVersion numbers that do exist are: [${nodeReleaseIdentifiers.join(
-				', '
-			)}]`
+				', ',
+			)}]`,
 		)
 	}
 	// return
@@ -196,6 +195,6 @@ export function getNodeReleaseIdentifiers(): NodeReleaseIdentifiers {
 	if (nodeReleaseIdentifiers.length) return nodeReleaseIdentifiers.slice()
 	// fail
 	throw new Error(
-		`Node.js releases have not yet been fetched.\nFetch first, then try again.`
+		`Node.js releases have not yet been fetched.\nFetch first, then try again.`,
 	)
 }
